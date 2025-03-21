@@ -13,8 +13,8 @@ export const getAll = async (req: express.Request, res: express.Response) => {
 
 export const ActualizarProducto = async (req: express.Request, res: express.Response) => {
     try {
-        const { id } = req.params; // Obtén el ID de los parámetros de la URL
-        const { nombre, precio, descripcion, categoria } = req.body; // Datos a actualizar
+        const { id } = req.params;
+        const { nombre, precio, descripcion, categoria } = req.body;
         const [result] = await pool.query(
             'UPDATE producto SET nombre = ?, precio = ?, descripcion = ?, categoria = ? WHERE id = ?',
             [nombre, precio, descripcion, categoria, id]
@@ -45,7 +45,7 @@ export const CrearProducto = async (req: express.Request, res: express.Response)
 
 export const BorrarProducto = async (req: express.Request, res: express.Response) => {
     try {
-        const { id } = req.params; // Obtén el ID de los parámetros de la URL
+        const { id } = req.params;
         const [result] = await pool.query('DELETE FROM producto WHERE id = ?', [id]);
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Producto no encontrado' });
